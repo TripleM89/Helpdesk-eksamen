@@ -90,9 +90,9 @@ function genererSaksnummer() {
  * [...SAKER, ...lagretsaker] lager en ny array med alle elementene fra begge.
  */
 function hentAlleSaker() {
-  const lagretTekst  = localStorage.getItem("helpdesk-saker") || "[]";
-  const lagredeSaker = JSON.parse(lagretTekst);
-  return [...SAKER, ...lagredeSaker];
+  const lagretTekst  = localStorage.getItem("helpdesk-saker") || "[]"
+  const lagredeSaker = JSON.parse(lagretTekst)
+  return [...SAKER, ...lagredeSaker]
 }
 
 /**
@@ -382,15 +382,14 @@ if (nySakForm) {
     }
 
     // ── VALIDERING 2: GDPR-samtykke ──
-    // Vi kan ikke behandle personopplysninger uten samtykke.
-    // Dette er et krav i GDPR artikkel 6(1)(a).
-    if (!samtykke) {
-      document.getElementById("samtykke-feil").classList.remove("hidden");
-      return; // Stopp innsending
-    } else {
-      // Skjul feilmeldingen hvis brukeren har krysset av
-      document.getElementById("samtykke-feil").classList.add("hidden");
-    }
+if (!samtykke) {
+  document.getElementById("samtykke-feil").classList.remove("hidden")
+  return
+} else {
+  document.getElementById("samtykke-feil").classList.add("hidden")
+}
+
+
 
     // ── LAG SAK-OBJEKT ──
     // Alle validerte data samles i ett objekt.
