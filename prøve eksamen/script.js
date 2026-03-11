@@ -26,6 +26,53 @@
  * verdi "status" har og returnerer riktig klasse.
  * Disse klassene er definert i style.css.
  */
+
+const erPåLoginSide = window.location.pathname.endsWith("login.html")
+
+if (!erPåLoginSide) {
+  if (!sessionStorage.getItem("innlogget-bruker")) {
+    window.location.href = "login.html"
+  }
+}
+
+const loggInnBtn = document.getElementById("logg-inn-btn")
+
+if (loggInnBtn) {
+  if (sessionStorage.getItem("innlogget-bruker")) {
+    window.location.href = "index.html"
+  }
+
+  loggInnBtn.addEventListener("click", () => {
+    const brukernavn = document.getElementById("brukernavn").value.trim()
+    const passord    = document.getElementById("passord").value
+    const bruker     = BRUKERE.find(b => b.brukernavn === brukernavn && b.passord === passord)
+
+    if (bruker) {
+      sessionStorage.setItem("innlogget-bruker", bruker.brukernavn)
+      sessionStorage.setItem("innlogget-navn",   bruker.navn)
+      sessionStorage.setItem("innlogget-rolle",  bruker.rolle)
+      window.location.href = "index.html"
+    } else {
+      document.getElementById("login-feil").classList.remove("hidden")
+    }
+  });
+
+  document.getElementById("passord").addEventListener("keydown", e => {
+    if (e.key === "Enter") loggInnBtn.click()
+  });
+}
+
+const loggUtBtn = document.getElementById("logg-ut-btn")
+
+if (loggUtBtn) {
+  document.getElementById("innlogget-navn").textContent = sessionStorage.getItem("innlogget-navn") || ""
+  loggUtBtn.addEventListener("click", () => {
+    sessionStorage.clear()
+    window.location.href = "login.html"
+  });
+}
+
+
 function statusKlasse(status) {
   switch (status) {
     case "åpen":     return "status-åpen";

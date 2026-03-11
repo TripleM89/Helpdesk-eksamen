@@ -110,3 +110,10 @@ const SAKER = [
 // ──────────────────────────────────────────────
 
 let nesteId = SAKER.length + 1;
+
+
+const BRUKERE = [
+  { brukernavn: "admin",   passord: "Admin123",  rolle: "admin",  navn: "IT-administrator" },
+  { brukernavn: "elev1",   passord: "Elev123",   rolle: "bruker", navn: "Elev Elvebakken"  },
+  { brukernavn: "laerer1", passord: "Laerer123", rolle: "bruker", navn: "Lærer Elvebakken" }
+];
