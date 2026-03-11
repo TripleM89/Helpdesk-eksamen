@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--
+  index.html — Forsiden til HelpDesk
+
+  DOCTYPE-deklarasjonen øverst forteller nettleseren at dette er HTML5.
+  lang="no" er viktig for skjermlesere og søkemotorer – forteller at
+  innholdet er på norsk.
+-->
+<html lang="no">
+<head>
+  <!--
+    <head> inneholder metadata – informasjon OM siden, ikke synlig innhold.
+  -->
+
+  <!-- Tegnsett: UTF-8 støtter norske tegn (æ, ø, å) og emojier -->
+  <meta charset="UTF-8" />
+
+  <!-- Viewport: gjør siden responsiv på mobil.
+       width=device-width = bruk skjermens faktiske bredde
+       initial-scale=1.0  = ikke zoom inn automatisk -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tittelen som vises i nettleser-fanen -->
+  <title>HelpDesk – IT Kundestøtte</title>
+
+  <!-- Kobler til CSS-filen. rel="stylesheet" sier hva slags fil det er. -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!--
+    <body> inneholder alt som er synlig på siden.
+    Vi har fire hoveddeler:
+      1. <nav>     – navigasjonsmenyen
+      2. <header>  – hero-seksjonen øverst
+      3. <section> – statistikk-kort og sakstabell
+      4. <footer>  – bunnteksten
+  -->
+
+  <!-- ════════════════════════════════════════
+       NAVIGASJON
+       Samme navbar på alle fire sider.
+       class="active" settes på den siden vi er på nå.
+  ════════════════════════════════════════ -->
+  <nav class="navbar">
+    <div class="nav-brand">🖥️ HelpDesk</div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Hjem</a></li>
+      <li><a href="saker.html">Mine saker</a></li>
+      <li><a href="ny-sak.html">Ny sak</a></li>
+      <li><a href="personvern.html">Personvern</a></li>
+    </ul>
+  </nav>
+
+  <!-- ════════════════════════════════════════
+       HERO-SEKSJON
+       Den store blå velkomstbanneren øverst.
+  ════════════════════════════════════════ -->
+  <header class="hero">
+    <h1>Velkommen til HelpDesk</h1>
+    <p>Intern IT-støtte for ansatte og elever. Registrer saker, følg status og finn løsninger.</p>
+    <!-- Denne <a>-taggen ser ut som en knapp via CSS-klassen btn-primary -->
+    <a href="ny-sak.html" class="btn-primary">Opprett ny sak</a>
+  </header>
+
+  <!-- ════════════════════════════════════════
+       STATISTIKK-KORT
+       Viser antall saker per status.
+       
+       id-attributtene brukes av script.js til å finne disse
+       elementene og oppdatere tallene dynamisk.
+       Starter med «–» som placeholder til JavaScript kjører.
+  ════════════════════════════════════════ -->
+  <section class="stats-grid">
+    <div class="stat-card">
+      <span class="stat-number" id="åpne-saker">–</span>
+      <span class="stat-label">Åpne saker</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number" id="løste-saker">–</span>
+      <span class="stat-label">Løste saker</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number" id="pågående-saker">–</span>
+      <span class="stat-label">Pågående</span>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SAKSTABELL
+       Viser de 5 nyeste sakene.
+       
+       <thead> = tabellhode (kolonneetiketter)
+       <tbody> = tabellkropp (radene med data)
+       
+       tbody er tom her – script.js fyller den inn
+       når siden laster.
+  ════════════════════════════════════════ -->
+  <section class="recent-section">
+    <h2>Siste innmeldte saker</h2>
+    <table class="sak-tabell">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Tittel</th>
+          <th>Kategori</th>
+          <th>Status</th>
+          <th>Dato</th>
+        </tr>
+      </thead>
+      <tbody id="sak-liste">
+        <!-- Fylles inn av script.js -->
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════ -->
+  <footer>
+    <p>HelpDesk v1.0 – Elvebakken VGS · IT-avdelingen</p>
+    <p>
+      <a href="personvern.html" style="color: rgba(255,255,255,0.6);">
+        Personvernerklæring
+      </a>
+    </p>
+  </footer>
+
+  <!-- ════════════════════════════════════════
+       JAVASCRIPT
+       
+       Script-tagene kommer NEDERST i <body>.
+       Årsaken: nettleseren leser HTML fra topp til bunn.
+       Hvis vi la script øverst, ville JavaScript prøve å
+       finne HTML-elementer som ikke er lastet ennå.
+       
+       data.js lastes FØR script.js fordi script.js
+       bruker SAKER-variabelen som er definert i data.js.
+  ════════════════════════════════════════ -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

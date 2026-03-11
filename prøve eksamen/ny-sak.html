@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<!--
+  ny-sak.html — Skjema for å melde inn ny IT-støttesak
+
+  Denne siden inneholder et HTML-skjema med validering.
+  
+  Viktig: selve innsendingen håndteres av JavaScript i script.js,
+  ikke av HTML alene. Vi bruker event.preventDefault() for å stoppe
+  nettleserens standard oppførsel (som ville lastet siden på nytt).
+-->
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ny sak – HelpDesk</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-brand">🖥️ HelpDesk</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Hjem</a></li>
+      <li><a href="saker.html">Mine saker</a></li>
+      <li><a href="ny-sak.html" class="active">Ny sak</a></li>
+      <li><a href="personvern.html">Personvern</a></li>
+    </ul>
+  </nav>
+
+  <main class="form-container">
+    <h2>Registrer ny støttesak</h2>
+
+    <!--
+      SKJEMAET
+      
+      id="ny-sak-form" brukes av script.js til å lytte på submit-hendelsen.
+      
+      Vi bruker IKKE action="" eller method="" på skjemaet fordi vi
+      ikke sender data til en server – JavaScript håndterer alt.
+    -->
+    <form id="ny-sak-form">
+
+      <!-- ── FELT: Navn ── -->
+      <div class="form-group">
+        <!--
+          for="navn" kobler labelen til input-feltet.
+          Dette betyr at klikk på labelen setter fokus på feltet.
+          God praksis for tilgjengelighet (universell utforming).
+        -->
+        <label for="navn">Ditt navn *</label>
+        <input
+          type="text"
+          id="navn"
+          name="navn"
+          placeholder="Fornavn Etternavn"
+          required
+          <!--
+            required er et HTML5-attributt som hindrer innsending
+            hvis feltet er tomt. Vi gjør ekstra validering i JS også.
+          -->
+        />
+      </div>
+
+      <!-- ── FELT: E-post ── -->
+      <div class="form-group">
+        <label for="epost">E-postadresse *</label>
+        <input
+          type="email"
+          id="epost"
+          name="epost"
+          placeholder="fornavn@elev.oslo.kommune.no"
+          required
+          <!--
+            type="email" gjør at nettleseren sjekker at det er en
+            gyldig e-postadresse (inneholder @ og domene).
+            Vi gjør en ekstra sjekk i JS for å begrense til
+            skole-e-postadresser.
+          -->
+        />
+        <!--
+          Feilmelding som vises hvis e-posten er ugyldig.
+          class="hidden" skjuler den som standard.
+          JavaScript fjerner "hidden"-klassen hvis valideringen feiler.
+        -->
+        <p id="epost-feil" class="feilmelding hidden">
+          Bruk skole-e-postadressen din (@elev.oslo.kommune.no).
+        </p>
+      </div>
+
+      <!-- ── FELT: Tittel ── -->
+      <div class="form-group">
+        <label for="tittel">Tittel på problemet *</label>
+        <input
+          type="text"
+          id="tittel"
+          name="tittel"
+          placeholder="Kort beskrivelse av problemet"
+          required
+        />
+      </div>
+
+      <!-- ── FELT: Kategori (dropdown) ── -->
+      <div class="form-group">
+        <label for="kategori">Kategori *</label>
+        <!--
+          <select> lager en nedtrekksliste.
+          Hvert <option> er et valg.
+          value="" på første option gjør at required-sjekken fungerer.
+        -->
+        <select id="kategori" name="kategori" required>
+          <option value="">Velg kategori...</option>
+          <option value="hardware">Hardware</option>
+          <option value="software">Software</option>
+          <option value="nettverk">Nettverk</option>
+          <option value="bruker">Brukertilgang</option>
+          <option value="annet">Annet</option>
+        </select>
+      </div>
+
+      <!-- ── FELT: Prioritet ── -->
+      <div class="form-group">
+        <label for="prioritet">Prioritet</label>
+        <select id="prioritet" name="prioritet">
+          <option value="lav">Lav</option>
+          <!-- selected gjør "medium" til standardvalg -->
+          <option value="medium" selected>Medium</option>
+          <option value="høy">Høy</option>
+          <option value="kritisk">Kritisk</option>
+        </select>
+      </div>
+
+      <!-- ── FELT: Beskrivelse (tekstboks) ── -->
+      <div class="form-group">
+        <label for="beskrivelse">Detaljert beskrivelse *</label>
+        <!--
+          <textarea> er en flerlinjers tekstboks.
+          rows="5" setter startstørrelsen (kan resizes av brukeren).
+        -->
+        <textarea
+          id="beskrivelse"
+          name="beskrivelse"
+          rows="5"
+          placeholder="Beskriv problemet. Hva skjedde? Når begynte det? Hva har du prøvd?"
+          required
+        ></textarea>
+      </div>
+
+      <!-- ── FELT: GDPR-samtykke ── -->
+      <div class="form-group checkbox-group">
+        <!--
+          GDPR krever aktivt samtykke for lagring av personopplysninger.
+          En avkrysningsboks som brukeren MÅ krysse av er den vanligste
+          måten å innhente dette på.
+          
+          type="checkbox" lager en avkrysningsboks.
+          Verdien leses i JS med .checked (true/false).
+        -->
+        <input type="checkbox" id="samtykke" name="samtykke" />
+        <label for="samtykke">
+          Jeg godtar at navn og e-post lagres for å behandle denne saken,
+          i henhold til <a href="personvern.html">personvernerklæringen</a>.
+        </label>
+        <p id="samtykke-feil" class="feilmelding hidden">
+          Du må godta personvernvilkårene for å sende inn.
+        </p>
+      </div>
+
+      <div class="form-actions">
+        <!-- type="submit" utløser submit-hendelsen på skjemaet -->
+        <button type="submit" class="btn-primary">Send inn sak</button>
+        <!-- Denne lenken tar brukeren tilbake uten å sende inn -->
+        <a href="index.html" class="btn-secondary">Avbryt</a>
+      </div>
+
+    </form>
+
+    <!-- ════════════════════════════════════════
+         BEKREFTELSESMELDING
+         
+         Vises av JavaScript etter vellykket innsending.
+         Skjemaet skjules og denne vises i stedet.
+         Starter med class="hidden" slik at den ikke er synlig.
+    ════════════════════════════════════════ -->
+    <div id="bekreftelse" class="bekreftelse hidden">
+      <h3>✅ Saken er registrert!</h3>
+      <p>Saksnummer: <strong id="saksnummer"></strong></p>
+      <!-- id="bekreftelse-epost" fylles inn av JS med brukerens e-post -->
+      <p>Vi kontakter deg på <strong id="bekreftelse-epost"></strong>.</p>
+      <a href="index.html" class="btn-primary">Tilbake til forsiden</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>HelpDesk v1.0 – Elvebakken VGS · IT-avdelingen</p>
+    <p>
+      <a href="personvern.html" style="color: rgba(255,255,255,0.6);">
+        Personvernerklæring
+      </a>
+    </p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

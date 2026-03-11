@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+  saker.html — Saksoversikt med søk og filtrering
+
+  Denne siden viser alle innmeldte saker og lar brukeren:
+    – Filtrere på status (åpen / pågående / løst)
+    – Filtrere på kategori (hardware / software osv.)
+    – Søke fritekst i tittel og beskrivelse
+-->
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mine saker – HelpDesk</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-brand">🖥️ HelpDesk</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Hjem</a></li>
+      <li><a href="saker.html" class="active">Mine saker</a></li>
+      <li><a href="ny-sak.html">Ny sak</a></li>
+      <li><a href="personvern.html">Personvern</a></li>
+    </ul>
+  </nav>
+
+  <main class="page-container">
+    <h2>Mine saker</h2>
+
+    <!-- ════════════════════════════════════════
+         FILTER-BAR
+         
+         To <select>-dropdowns: én for status og én for kategori.
+         id-attributtene brukes av script.js til å lese valgt verdi.
+         
+         addEventListener("change", ...) i script.js lytter på
+         endringer her og oppdaterer listen automatisk.
+    ════════════════════════════════════════ -->
+    <div class="filter-bar">
+
+      <label for="filter-status">Status:</label>
+      <select id="filter-status">
+        <option value="alle">Alle</option>
+        <option value="åpen">Åpen</option>
+        <option value="pågående">Pågående</option>
+        <option value="løst">Løst</option>
+      </select>
+
+      <label for="filter-kategori">Kategori:</label>
+      <select id="filter-kategori">
+        <option value="alle">Alle</option>
+        <option value="hardware">Hardware</option>
+        <option value="software">Software</option>
+        <option value="nettverk">Nettverk</option>
+        <option value="bruker">Brukertilgang</option>
+        <option value="annet">Annet</option>
+      </select>
+
+    </div>
+
+    <!-- Treff-teller: oppdateres av script.js hver gang filteret endres.
+         Eksempel: "Viser 3 av 6 saker" -->
+    <p id="treff-teller" style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;"></p>
+
+    <!-- ════════════════════════════════════════
+         SAKSLISTE
+         Denne div-en er tom – script.js fyller den inn
+         med sak-kort når siden laster.
+    ════════════════════════════════════════ -->
+    <div id="alle-saker">
+      <!-- Fylles av script.js -->
+    </div>
+
+    <!-- ════════════════════════════════════════
+         SØKEFELT
+         Plassert under listen – brukeren søker og klikker
+         på knappen (eller trykker Enter via script.js).
+    ════════════════════════════════════════ -->
+    <div class="søk-seksjon">
+      <input
+        type="text"
+        id="søk-input"
+        placeholder="Søk i tittel eller beskrivelse..."
+      />
+      <button id="søk-btn" class="btn-secondary">Søk</button>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>HelpDesk v1.0 – Elvebakken VGS · IT-avdelingen</p>
+    <p>
+      <a href="personvern.html" style="color: rgba(255,255,255,0.6);">
+        Personvernerklæring
+      </a>
+    </p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
