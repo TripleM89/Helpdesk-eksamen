@@ -312,7 +312,7 @@ function filtrerOgVis() {
       sak.beskrivelse.toLowerCase().includes(søkeTekst)
     );
   }
-const sorterValg     = document.getElementById("sorter-prioritet")?.value || "ingen";
+const sorterValg = document.getElementById("sorter-prioritet")?.value || "ingen";
   const prioritetVerdi = { kritisk: 4, høy: 3, medium: 2, lav: 1 };
 
   if (sorterValg === "høy-først") {

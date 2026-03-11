@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personvern HelpDesk</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-brand">HelpDesk</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Hjem</a></li>
+      <li><a href="saker.html">Mine saker</a></li>
+      <li><a href="ny-sak.html">Ny sak</a></li>
+      <li><a href="personvern.html" class="active">Personvern</a></li>
+    </ul>
+  </nav>
+
+  <main class="personvern-container">
+
+    <h1>Personvernerklæring</h1>
+    <p class="sist-oppdatert">Sist oppdatert: mars 2026</p>
+
+    <h2>1. Hvem er ansvarlig for dataene?</h2>
+    <p>
+      Elvebakken videregående skole, IT-avdelingen, er behandlingsansvarlig
+      for personopplysningene som samles inn via HelpDesk.
+    </p>
+
+    <h2>2. Hvilke opplysninger samler vi inn?</h2>
+    <p>Når du melder inn en IT-støttesak samler vi inn følgende:</p>
+    <ul>
+      <li><strong>Navn</strong> - for å vite hvem vi skal hjelpe</li>
+      <li><strong>E-postadresse</strong> - for å sende bekreftelse og oppdateringer</li>
+      <li><strong>Beskrivelse av problemet</strong> - for å løse saken</li>
+      <li><strong>Dato</strong> - for å prioritere og spore saker over tid</li>
+    </ul>
+    <p>
+      Ved innlogging behandles også brukernavn og rolle (admin/bruker).
+      Disse lagres i sessionStorage og slettes automatisk når nettleserfanen lukkes.
+    </p>
+
+    <h2>3. Hva brukes opplysningene til?</h2>
+    <p>
+      Opplysningene brukes kun til å behandle og løse din IT-støttesak.
+      Vi deler ikke dataene med tredjeparter og bruker dem ikke til
+      markedsføring eller andre formål.
+    </p>
+
+    <h2>4. Rettslig grunnlag</h2>
+    <p>
+      Behandlingen er basert på ditt samtykke etter GDPR artikkel 6
+      nr. 1 bokstav a. Du gir samtykket ved å krysse av på skjemaet
+      når du melder inn en sak.
+    </p>
+
+    <h2>5. Hvor lenge lagres opplysningene?</h2>
+    <p>
+      Innloggingsinformasjon (brukernavn og rolle) lagres i sessionStorage
+      og slettes automatisk når nettleserfanen lukkes.
+    </p>
+    <p>
+      Innmeldte saker lagres i localStorage og slettes når brukeren
+      tømmer nettleserens lagringsdata.
+    </p>
+    <p>
+      I et produksjonssystem ville data blitt slettet etter 12 måneder
+      i henhold til dataminimeringsprinsippet i GDPR artikkel 5.
+    </p>
+
+    <h2>6. Dine rettigheter</h2>
+    <p>Du har rett til å:</p>
+    <ul>
+      <li><strong>Innsyn</strong> - se hvilke opplysninger vi har om deg</li>
+      <li><strong>Retting</strong> - be om at feilaktige opplysninger rettes</li>
+      <li><strong>Sletting</strong> - be om at opplysningene dine slettes</li>
+      <li><strong>Trekke samtykket</strong> - du kan trekke tilbake samtykket når som helst</li>
+    </ul>
+
+    <h2>7. Kontakt</h2>
+    <p>
+      Spørsmål om personvern kan rettes til IT-avdelingen på
+        <a href="mailto:ikt.elvebakken@osloskolen.no">ikt.elvebakken@osloskolen.no</a>
+    </p>
+
+  </main>
+
+  <footer>
+    <p>HelpDesk v1.0 Elvebakken VGS · IT-avdelingen</p>
